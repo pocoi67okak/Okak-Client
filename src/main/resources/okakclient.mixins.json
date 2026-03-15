@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "ru.okak.client.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+  ],
+  "client": [
+    "XrayMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
