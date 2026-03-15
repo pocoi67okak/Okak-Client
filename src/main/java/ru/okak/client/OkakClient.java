@@ -1,6 +1,6 @@
 package ru.okak.client;
 
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.api.ClientModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.okak.client.module.ModuleManager;
@@ -10,7 +10,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
-public class OkakClient implements ModInitializer {
+public class OkakClient implements ClientModInitializer {
     public static final String MOD_ID = "okakclient";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     
@@ -18,7 +18,7 @@ public class OkakClient implements ModInitializer {
     private static KeyBinding guiKeyBinding;
 
     @Override
-    public void onInitialize() {
+    public void onInitializeClient() {
         LOGGER.info("Initializing Okak Client for 1.21.8...");
         moduleManager = new ModuleManager();
         moduleManager.init();
