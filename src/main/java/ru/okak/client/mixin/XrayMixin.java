@@ -31,19 +31,19 @@ public abstract class XrayMixin {
         }
     }
 
+    @Inject(method = "isOpaque", at = @At("HEAD"), cancellable = true)
+    private void onIsOpaque(BlockState state, CallbackInfoReturnable<Boolean> cir) {
+        if (XrayModule.xrayEnabled) {
+            // Make all blocks non-opaque so ore faces aren't culled by adjacent blocks
+            cir.setReturnValue(false);
+        }
+    }
+
     @SuppressWarnings("deprecation")
     @Inject(method = "getAmbientOcclusionLightLevel", at = @At("HEAD"), cancellable = true)
     private void onGetAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir) {
         if (XrayModule.xrayEnabled) {
             cir.setReturnValue(1.0f);
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    @Inject(method = "isSideInvisible", at = @At("HEAD"), cancellable = true)
-    private void onIsSideInvisible(BlockState state, BlockState stateFrom, Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        if (XrayModule.xrayEnabled) {
-            cir.setReturnValue(false); // To render our ores even if they are covered
         }
     }
 }
