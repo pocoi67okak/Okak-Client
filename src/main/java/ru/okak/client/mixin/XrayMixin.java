@@ -5,7 +5,6 @@ import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,14 +27,6 @@ public abstract class XrayMixin {
             if (!isTargetOre(state)) {
                 cir.setReturnValue(BlockRenderType.INVISIBLE);
             }
-        }
-    }
-
-    @Inject(method = "isOpaque", at = @At("HEAD"), cancellable = true)
-    private void onIsOpaque(BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        if (XrayModule.xrayEnabled) {
-            // Make all blocks non-opaque so ore faces aren't culled by adjacent blocks
-            cir.setReturnValue(false);
         }
     }
 
