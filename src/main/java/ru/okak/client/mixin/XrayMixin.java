@@ -37,4 +37,11 @@ public abstract class XrayMixin {
             cir.setReturnValue(1.0f);
         }
     }
+
+    @Inject(method = "isOpaque", at = @At("HEAD"), cancellable = true)
+    private void onIsOpaque(BlockState state, BlockView world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+        if (XrayModule.xrayEnabled) {
+            cir.setReturnValue(false);
+        }
+    }
 }
